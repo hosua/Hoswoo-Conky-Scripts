@@ -1,0 +1,89 @@
+conky.config = {
+    alignment = 'bottom_right',
+    background = false,
+    own_window = true,
+    own_window_class = 'Conky',
+    own_window_argb_visual = true,
+    own_window_argb_value = 50,
+    own_window_transparent = true,
+    own_window_type = 'normal',
+    own_window_hints = 'undecorated,below,skip_taskbar,sticky,skip_pager',
+    own_window_colour = '000000',
+    draw_borders = no,
+    gap_x = 10,
+    gap_y = 10,
+    minimum_height = 10,
+    minimum_width = 205,
+
+    use_xft = true,
+    xftalpha = 0.8,
+    font = 'Hack:normal:size=8',
+    text_buffer_size = 2048,
+    uppercase = no,
+    override_utf8_locale = yes,
+    default_color = 'ffffff',
+    color1 = 'c6396b',
+    color2 = 'fc8c3b',
+    color3 = 'f9e30f',
+    color4 = '4291e2',
+    color5 = '161925',
+    color6 = '3bf4bb',
+
+    update_interval = 1.0,
+    total_run_times = 0,
+    draw_shades = no,
+    default_shade_color = '000000',
+    draw_outline = no,
+    default_outline_color = '000000',
+    draw_graph_borders = true,
+    show_graph_scale = no,
+    show_graph_range = no,
+    short_units = yes,
+
+    use_spacer = none,
+    double_buffer = true,
+    no_buffers = true,
+    imlib_cache_size = 0,
+    cpu_avg_samples = 2,
+    hddtemp_host = "127.0.0.1",
+    hddtemp_port = "7634",
+}
+
+conky.text = [[
+#--------------------------------------------------------------------------------------------------------------------------------
+#                                                   Date/Time
+#--------------------------------------------------------------------------------------------------------------------------------
+${color4}${font ConkySymbols:size=12}i${font} Date/Time» $hr ${color}
+${voffset -5}
+${font Hack:normal:size=9}${goto 10}Day :${color2}${alignr 10}${time %A}${color}
+${font Hack:normal:size=9}${goto 10}Date:${color2}${alignr 10}${time %d %B %Y}${color}
+${font Hack:normal:size=9}${goto 10}Time:${color2}${alignr 10}${time %I}:${time %M %p}${color}
+${voffset -5}
+#--------------------------------------------------------------------------------------------------------------------------------
+#                                                   Weather
+#--------------------------------------------------------------------------------------------------------------------------------
+${color4}${font ConkySymbols:size=12}h${font} Weather» $hr ${color}
+${voffset -5}
+${execi 600 bash $HOME/Accuweather_RSS_conky_script/acc_RSS}
+${font conkyweather:size=30}${execpi 600  sed -n '2p' $HOME/Accuweather_RSS_conky_script/weather}${color2}${font}${goto 75}${voffset -25}${execpi 600 sed -n '1p' $HOME/Accuweather_RSS_conky_script/weather|cut -c 1-10}
+${goto 75}${execpi 600 sed -n '1p' $HOME/Accuweather_RSS_conky_script/weather|cut -c 12-40}
+${goto 75}${execpi 600 sed -n '1p' $HOME/Accuweather_RSS_conky_script/weather|cut -c41-60}${color}
+${voffset -5}
+${color4}${goto 10}${stippled_hr}${color}
+${voffset -5}
+${execi 600  sed -n '3p' $HOME/Accuweather_RSS_conky_script/weather}
+${font conkyweather:size=30}${execpi 600  sed -n '5p' $HOME/Accuweather_RSS_conky_script/weather}${color2}${font}${goto 75}${voffset -25}${execpi 600 sed -n '4p' $HOME/Accuweather_RSS_conky_script/weather|cut -c 1-10}
+${goto 75}${execpi 600 sed -n '4p' $HOME/Accuweather_RSS_conky_script/weather|cut -c 12-20}
+${goto 75}${execpi 600 sed -n '4p' $HOME/Accuweather_RSS_conky_script/weather|cut -c 22-60}${color}
+${voffset -5}
+${color4}${goto 10}${stippled_hr}${color}
+${voffset -5}
+${execi 600  sed -n '6p' $HOME/Accuweather_RSS_conky_script/weather}
+${font conkyweather:size=30}${execpi 600  sed -n '8p' $HOME/Accuweather_RSS_conky_script/weather}${color2}${font}${goto 75}${voffset -25}${execpi 600 sed -n '7p' $HOME/Accuweather_RSS_conky_script/weather|cut -c 1-10}
+${goto 75}${execpi 600 sed -n '7p' $HOME/Accuweather_RSS_conky_script/weather|cut -c 12-20}
+${goto 75}${execpi 600 sed -n '7p' $HOME/Accuweather_RSS_conky_script/weather|cut -c 22-60}${color}
+${voffset -5}
+${color4}${goto 10}${stippled_hr}${color}
+${voffset -5}
+#--------------------------------------------------------------------------------------------------------------------------------
+]];
