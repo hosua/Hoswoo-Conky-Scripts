@@ -98,7 +98,6 @@ ${color4}${font ConkySymbols:size=12}J${font} Memory» $hr${color}
 
 ${goto 10}RAM: ${color6}$mem${color}/${color2}$memmax ${color6}${alignr 10}$memperc% ${color1}${membar 4,80}${color}
 ${goto 10}SWAP: ${color6}$swap${color}/${color2}$swapmax ${color6}${alignr 10}$swapperc% ${color1}${swapbar 4,80}${color}
-${goto 10}MEM Temp:${color6}${alignr 10}${exec sensors | grep 'SODIMM' | awk 'NR==1{print $2}'}
 
 #-------------------------------------------------------------------------------------------------------------------------------
 #                                                   Processes
