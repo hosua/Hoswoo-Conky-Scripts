@@ -1,17 +1,17 @@
 conky.config = {
-    alignment = 'top_left',
-    background = false,
+    alignment = 'top_right',
+    background = true,
     own_window = true,
     own_window_class = 'Conky',
     own_window_argb_visual = true,
     own_window_argb_value = 50,
     own_window_transparent = true,
-    own_window_type = 'normal',
+    own_window_type = 'override',
     own_window_hints = 'undecorated,below,skip_taskbar,sticky,skip_pager',
     own_window_colour = '000000',
     draw_borders = no,
-    gap_x = 10,
-    gap_y = 10,
+    gap_x = 5470,
+    gap_y = 25,
     minimum_height = 10,
     minimum_width = 275,
 
@@ -56,11 +56,9 @@ conky.text = [[
 ${color4}${font ConkySymbols:size=12}a${font} System» $hr ${color}
 
 ${goto 10}OS:${color2}${alignr 10}${execi 86400 cat `ls -atr /etc/*-release | tail -2` | grep "PRETTY_NAME" | cut -d= -f2 |  sed 's/"//g'}${color}
-${goto 10}Codename:${color2}${alignr 10}${execi 65000 lsb_release -cs | awk '{print $1}'}${color}
-${goto 10}KDE Plasma:${color2}${alignr 10}${exec plasmashell --version | sed 's/\plasmashell //g'}${color}
 ${goto 10}${color}Kernel:${color2}${alignr 10}${kernel}${color}
 ${goto 10}Uptime:${color6}${alignr 10}$uptime${color}
-${goto 10}Battery Time:${color6}${alignr 10}${battery_time BAT0}
+#${goto 10}Battery Time:${color6}${alignr 10}${battery_time BAT0}
 
 #--------------------------------------------------------------------------------------------------------------------------------
 #                                                   CPU
@@ -70,7 +68,7 @@ ${color4}${font ConkySymbols:size=12}f${font} CPU» $hr${color}
 ${goto 10}CPU:${color2}${alignr 10}${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'| uniq | cut -c 18-26}${color}
 ${goto 10}Active Governor: ${color2}${alignr 10}${execi 1 cut -b 1-20 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor}${color}
 ${goto 10}Clock Rate:${color6}${alignr 10}${freq_g 1}GHz${color}
-${goto 10}CPU Temp:${color6}${alignr 10}${exec sensors | grep 'CPU' | awk 'NR==1{print $2}'}
+${goto 10}CPU Temp:${color6}${alignr 10}${exec sensors | grep Core | awk 'NR==1{print $3}' | cut -c 2-9}
 
 #-------------------------------------------------------------------------------------------------------------------------------
 #                                                   Cores
@@ -79,14 +77,17 @@ ${color}${goto 10}Core 1: ${color6}${freq_g 1}GHz ${alignr 10}${cpu cpu0}% ${col
 ${color}${goto 10}Core 2: ${color6}${freq_g 2}GHz ${alignr 10}${cpu cpu1}% ${color1}${cpubar cpu1 4,80}
 ${color}${goto 10}Core 3: ${color6}${freq_g 3}GHz ${alignr 10}${cpu cpu2}% ${color1}${cpubar cpu2 4,80}
 ${color}${goto 10}Core 4: ${color6}${freq_g 4}GHz ${alignr 10}${cpu cpu3}% ${color1}${cpubar cpu3 4,80}
-
+${color}${goto 10}Core 5: ${color6}${freq_g 4}GHz ${alignr 10}${cpu cpu4}% ${color1}${cpubar cpu4 4,80}
+${color}${goto 10}Core 6: ${color6}${freq_g 4}GHz ${alignr 10}${cpu cpu5}% ${color1}${cpubar cpu5 4,80}
+${color}${goto 10}Core 7: ${color6}${freq_g 4}GHz ${alignr 10}${cpu cpu6}% ${color1}${cpubar cpu6 4,80}
+${color}${goto 10}Core 8: ${color6}${freq_g 4}GHz ${alignr 10}${cpu cpu7}% ${color1}${cpubar cpu7 4,80}
 #-------------------------------------------------------------------------------------------------------------------------------
 #                                                   GPU
 #-------------------------------------------------------------------------------------------------------------------------------
 ${color4}${font ConkySymbols:size=12}f${font} GPU» $hr${color}
 
-${goto 10}Graphics cards:${color2}${alignr 10}${execi 600 hwinfo --gfxcard | grep "Model" | cut -c 11-28}${color}
-${goto 10}Driver:${color2}${alignr 10}${execi 600 glxinfo | grep "OpenGL version" |cut -c 28-40}${color}
+${goto 10}Graphics cards:${color2}${alignr 10}${execi 600 hwinfo --gfxcard | grep "Model" | cut -c 25-46}${color}
+${goto 10}Driver:${color2}${alignr 10}${execi 600 glxinfo | grep "OpenGL version" |cut -c 24-50}${color}
 ${goto 10}GPU Temp:${color6}${alignr 10}${exec sensors | grep 'CPU' | awk 'NR==1{print $2}'}
 
 #-------------------------------------------------------------------------------------------------------------------------------
